@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.game_container {
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+}
+.gamesquare{
+    box-shadow: -1px 10px 50px 1px red
+}
+.gamesquare-y{
+    box-shadow: -1px 10px 50px 1px yellow
+}
+.gamesquare-b{
+    box-shadow: -1px 10px 50px 1px blue
+}
+.gamesquare-g{
+    box-shadow: -1px 10px 50px 1px #07F93D
+}
