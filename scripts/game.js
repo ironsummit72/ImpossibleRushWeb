@@ -1,4 +1,7 @@
 const gamesquare = document.getElementById("gamesquare");
+const colordot = document.getElementById("colordot");
+let isGameStarted=false;
+colordot.style.display="none";
 const gamesounds = {
   gameover: "../assets/sounds/gameover.mp3",
   drop: "../assets/sounds/drop.mp3",
@@ -8,11 +11,14 @@ let count = Math.round(Math.random() * 4);
 rotateSquare(count);
 
 gamesquare.addEventListener("click", () => {
-  count++;
-  rotateSquare(count);
-
-  if (count >= 4) {
-    count = 0;
+  if (!isGameStarted) {
+    isGameStarted = true;
+  } else {
+    count++;
+    rotateSquare(count);
+    if (count >= 4) {
+      count = 0;
+    }
   }
 });
 
@@ -36,5 +42,33 @@ function rotateSquare(rotatevalue) {
     gamesquare.style.transform = `rotate(${270}deg)`;
     gamesquare.className = `gamesquare-y`;
   }
- 
+}
+
+function dropDot(colorNumber,level) {
+  colordot.style.display="block";
+  switch (colorNumber){
+    case 1:colordot.style.backgroundColor='red'
+    break;
+    case 2:colordot.style.backgroundColor='blue'
+    break;
+    case 3:colordot.style.backgroundColor='#07f93d'
+    break;
+    case 4:colordot.style.backgroundColor='yellow'
+    break;
+  }
+  let id = null;
+  let dotposition = colordot.offsetTop;
+  clearInterval(id);
+  id = setInterval(frame, );
+  function frame() {
+    if (dotposition>= 450) {
+      clearInterval(id)
+      colordot.style.display="none";
+      colordot.style.top = 5 +"px";
+    }
+    else{
+      dotposition+=level;
+      colordot.style.top = dotposition +"px";
+    }
+  }
 }
