@@ -11,14 +11,14 @@
   cursor: pointer;
 }
 .gamesquare{
-    box-shadow: -1px 10px 50px 1px red
+    box-shadow: -1px 10px 50px 1px red;
 }
 .gamesquare-y{
-    box-shadow: -1px 10px 50px 1px yellow
+    box-shadow: -1px 10px 50px 1px yellow;
 }
 .gamesquare-b{
-    box-shadow: -1px 10px 50px 1px blue
+    box-shadow: -1px 10px 50px 1px blue;
 }
 .gamesquare-g{
-    box-shadow: -1px 10px 50px 1px #07F93D
+    box-shadow: -1px 10px 50px 1px #07F93D;
 }
