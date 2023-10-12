@@ -36,8 +36,4 @@ function rotateSquare(rotatevalue) {
     gamesquare.style.transform = `rotate(${270}deg)`;
     gamesquare.className = `gamesquare-y`;
   }
-  //1 rotateval=red
-  //2 rotateval=blue
-  //3 rotateval=green
-  //4 rotateval=yellow
 }
