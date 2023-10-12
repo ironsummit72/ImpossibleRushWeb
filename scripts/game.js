@@ -24,7 +24,7 @@ function Playsound(ismuted, source) {
 }
 function rotateSquare(rotatevalue) {
   if (rotatevalue === 1) {
-    gamesquare.style.transform = `rotate(${360}deg)`;
+    gamesquare.style.transform = `rotate(${0}deg)`;
     gamesquare.className = `gamesquare`;
   } else if (rotatevalue === 2) {
     gamesquare.style.transform = `rotate(${90}deg)`;
@@ -36,4 +36,5 @@ function rotateSquare(rotatevalue) {
     gamesquare.style.transform = `rotate(${270}deg)`;
     gamesquare.className = `gamesquare-y`;
   }
+ 
 }
