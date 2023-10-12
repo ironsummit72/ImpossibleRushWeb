@@ -23,6 +23,7 @@
   box-shadow: -1px 10px 50px 1px #07f93d;
 }
 .colordot {
+  display: none;
   position: absolute;
   top: 5px;
   width: 70px;
@@ -31,4 +32,3 @@
   border-radius: 50%;
   animation: bar 7s ease;
 }
-
