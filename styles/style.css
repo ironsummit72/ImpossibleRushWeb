@@ -10,15 +10,25 @@
   justify-content: center;
   cursor: pointer;
 }
-.gamesquare{
-    box-shadow: -1px 10px 50px 1px red;
+.gamesquare {
+  box-shadow: -1px 10px 50px 1px red;
 }
-.gamesquare-y{
-    box-shadow: -1px 10px 50px 1px yellow;
+.gamesquare-y {
+  box-shadow: -1px 10px 50px 1px yellow;
 }
-.gamesquare-b{
-    box-shadow: -1px 10px 50px 1px blue;
+.gamesquare-b {
+  box-shadow: -1px 10px 50px 1px blue;
 }
-.gamesquare-g{
-    box-shadow: -1px 10px 50px 1px #07F93D;
+.gamesquare-g {
+  box-shadow: -1px 10px 50px 1px #07f93d;
 }
+.colordot {
+  position: absolute;
+  top: 5px;
+  width: 70px;
+  height: 70px;
+  background-color: grey;
+  border-radius: 50%;
+  animation: bar 7s ease;
+}
+
