@@ -44,7 +44,6 @@
 .scoresection {
   font-size: larger;
   width: 200px;
-  border: 2px solid white;
   display: flex;
   flex-direction: column;
   margin-left: 30px;
@@ -53,7 +52,6 @@
 
 .btnsection {
   width: 200px;
-
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -70,8 +68,6 @@
 .playsound {
   width: 30px;
   height: 30px;
-  background: url("../assets/icons/volumeup.png");
-  background-color: white;
   cursor: pointer;
 }
 
