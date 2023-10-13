@@ -1,6 +1,10 @@
 const gamesquare = document.getElementById("gamesquare");
 const colordot = document.getElementById("colordot");
+gamesquare.style.width="300px"
+gamesquare.style.height="300px"
+gamesquare.style.background="url('../assets/images/game.png') no-repeat"
 let isGameStarted=false;
+let isGameOver=undefined;
 colordot.style.display="none";
 const gamesounds = {
   gameover: "../assets/sounds/gameover.mp3",
