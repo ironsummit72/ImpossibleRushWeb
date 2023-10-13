@@ -1,10 +1,11 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 .game_container {
   width: 100vw;
-  height: 95vh;
+  height: 90vh;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -33,4 +34,51 @@
   background-color: grey;
   border-radius: 50%;
   animation: bar 7s ease;
+}.navbar {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scoresection {
+  font-size: larger;
+  width: 200px;
+  border: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  justify-content: space-around;
+}
+
+.btnsection {
+  width: 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.playpause {
+  width: 30px;
+  height: 30px;
+  background: url("../assets/icons/pause.svg");
+  background-color: white;
+  cursor: pointer;
+}
+
+.playsound {
+  width: 30px;
+  height: 30px;
+  background: url("../assets/icons/volumeoff.png");
+  background-color: white;
+  cursor: pointer;
+}
+
+.darkmode {
+  width: 30px;
+  height: 30px;
+  background: url("../assets/icons/darkmode.svg");
+  background-color: white;
+  cursor: pointer;
 }
