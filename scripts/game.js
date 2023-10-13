@@ -10,6 +10,7 @@ let gameInterval=null;
 let frameIntervalID = null;
 let Score=0;
 let HighiestScore=undefined;
+let Difficulty=2
 colordot.style.display="none";
 const gamesounds = {
   gameover: "../assets/sounds/gameover.mp3",
@@ -45,7 +46,7 @@ function startGame() {
     gameInterval = setInterval(() => {
       randomDots = Math.round(Math.random() * 3 + 1);
       Playsound(gamesounds.isMuted,gamesounds.drop)
-      dropDot(randomDots, 2);
+      dropDot(randomDots, Difficulty);
       setTimeout(() => {
         countScore(Btncount, randomDots);
       }, 1500);
