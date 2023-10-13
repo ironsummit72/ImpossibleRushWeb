@@ -29,19 +29,25 @@ function Playsound(ismuted, source) {
   audio.play();
 }
 function rotateSquare(rotatevalue) {
-  if (rotatevalue === 1) {
-    gamesquare.style.transform = `rotate(${0}deg)`;
-    gamesquare.className = `gamesquare`;
-  } else if (rotatevalue === 2) {
-    gamesquare.style.transform = `rotate(${90}deg)`;
-    gamesquare.className = `gamesquare-b`;
-  } else if (rotatevalue === 3) {
-    gamesquare.style.transform = `rotate(${180}deg)`;
-    gamesquare.className = `gamesquare-g`;
-  } else if (rotatevalue === 4) {
-    gamesquare.style.transform = `rotate(${270}deg)`;
-    gamesquare.className = `gamesquare-y`;
+  switch (rotatevalue) {
+    case 1:
+      gamesquare.style.transform = `rotate(${0}deg)`;
+      gamesquare.className = `gamesquare`;
+      break;
+    case 2:
+      gamesquare.style.transform = `rotate(${90}deg)`;
+      gamesquare.className = `gamesquare-b`;
+      break;
+    case 3:
+      gamesquare.style.transform = `rotate(${180}deg)`;
+      gamesquare.className = `gamesquare-g`;
+      break;
+    case 4:
+      gamesquare.style.transform = `rotate(${270}deg)`;
+      gamesquare.className = `gamesquare-y`;
+      break;
   }
+
 }
 
 function dropDot(colorNumber,level) {
