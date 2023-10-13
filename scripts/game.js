@@ -26,24 +26,23 @@ const gamesounds = {
   drop: "../assets/sounds/drop.mp3",
   isMuted: gameData.isMuted,
 };
-HighiestScore=gameData.HighiestScore
+HighiestScore = gameData.HighiestScore;
 console.log(HighiestScore);
-highiestscore.innerHTML=`Highiest Score ${HighiestScore}`
-currentscore.innerHTML=`Score ${Score}`
- if (gamesounds.isMuted) {
-   playsound.style.backgroundImage = "url('../assets/icons/volumeup.png')";
-  } else {
-    playsound.style.backgroundImage = "url('../assets/icons/volumeoff.png')";
-  }
-  let darkMode=gameData.isDarkMode
-  if(darkMode)
-  {
-    document.body.style.background="#090743"
-    document.body.style.color="white"
-  }else{
-    document.body.style.background="white"
-    document.body.style.color="black"
-  }
+highiestscore.innerHTML = `Highiest Score ${HighiestScore}`;
+currentscore.innerHTML = `Score ${Score}`;
+if (gamesounds.isMuted) {
+  playsound.style.backgroundImage = "url('../assets/icons/volumeup.png')";
+} else {
+  playsound.style.backgroundImage = "url('../assets/icons/volumeoff.png')";
+}
+let darkMode = gameData.isDarkMode;
+if (darkMode) {
+  document.body.style.background = "#090743";
+  document.body.style.color = "white";
+} else {
+  document.body.style.background = "white";
+  document.body.style.color = "black";
+}
   darkmode.addEventListener('click',()=>{
     if(darkMode)
     {
@@ -64,17 +63,15 @@ currentscore.innerHTML=`Score ${Score}`
   rotateSquare(Btncount);
   
   gamesquare.addEventListener("click", () => {
-    if (!isGameStarted){
+    if (!isGameStarted) {
       startGame();
-    }else{
+    } else {
       Btncount++;
       if (Btncount > 4) {
         Btncount = 1;
       }
       rotateSquare(Btncount);
     }
-
-    
   });
   
   playsound.addEventListener('click',()=>{
