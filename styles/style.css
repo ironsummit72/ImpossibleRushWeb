@@ -70,7 +70,7 @@
 .playsound {
   width: 30px;
   height: 30px;
-  background: url("../assets/icons/volumeoff.png");
+  background: url("../assets/icons/volumeup.png");
   background-color: white;
   cursor: pointer;
 }

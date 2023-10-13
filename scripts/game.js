@@ -1,9 +1,15 @@
 const gamesquare = document.getElementById("gamesquare");
 const colordot = document.getElementById("colordot");
 const info = document.getElementById("info");
+const playpause=document.getElementById('playpause')
+const darkmode=document.getElementById('darkmode')
+const playsound=document.getElementById('playsound')
 gamesquare.style.width="300px"
 gamesquare.style.height="300px"
 gamesquare.style.background="url('../assets/images/game.png') no-repeat"
+colordot.style.display="none";
+playpause.style.display="none";
+playsound.style.display="none";
 let isGameStarted=false;
 let isGameOver=undefined;
 let gameInterval=null;
@@ -11,7 +17,6 @@ let frameIntervalID = null;
 let Score=0;
 let HighiestScore=undefined;
 let Difficulty=2
-colordot.style.display="none";
 const gamesounds = {
   gameover: "../assets/sounds/gameover.mp3",
   drop: "../assets/sounds/drop.mp3",
@@ -33,6 +38,18 @@ gamesquare.addEventListener("click", () => {
 
 
 });
+
+playsound.addEventListener('click',()=>{
+  if(!gamesounds.isMuted)
+  {
+    gamesounds.isMuted=true;
+    playsound.style.background="url('../assets/icons/volumeoff.png')"
+  }else{
+    gamesounds.isMuted=false;
+    playsound.style.background="url('../assets/icons/volumeup.png')"
+  }
+})
+
 function startGame() {
   let randomDots = Math.round(Math.random() * 3 + 1);
   if (!isGameStarted) {
@@ -41,7 +58,9 @@ function startGame() {
   } else {
     info.style.display = "block";
   }
-  if (!isGameOver) {
+  if (!isGameOver && isGameStarted) {
+    playpause.style.display = "block";
+    playsound.style.display = "block";
     dropDot();
     gameInterval = setInterval(() => {
       randomDots = Math.round(Math.random() * 3 + 1);
@@ -61,6 +80,8 @@ function countScore(Btncount,randomDots)
     isGameOver = true;
     info.style.display = "block";
     info.innerHTML = "Game Over";
+    playpause.style.display = "none";
+    playsound.style.display = "none";
     clearInterval(gameInterval);
     Playsound(gamesounds.isMuted,gamesounds.gameover)
   }
