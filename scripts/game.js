@@ -4,12 +4,13 @@ const info = document.getElementById("info");
 const playpause=document.getElementById('playpause')
 const darkmode=document.getElementById('darkmode')
 const playsound=document.getElementById('playsound')
+const currentscore=document.getElementById('currentscore')
+const highiestscore=document.getElementById('highiestscore')
 gamesquare.style.width="300px"
 gamesquare.style.height="300px"
 gamesquare.style.background="url('../assets/images/game.png') no-repeat"
 colordot.style.display="none";
 playpause.style.display="none";
-playsound.style.display="none";
 let isGameStarted=false;
 let isGameOver=undefined;
 let gameInterval=null;
@@ -17,37 +18,77 @@ let frameIntervalID = null;
 let Score=0;
 let HighiestScore=undefined;
 let Difficulty=2
+let gameData=undefined
+
+gameData=getGameData()
 const gamesounds = {
   gameover: "../assets/sounds/gameover.mp3",
   drop: "../assets/sounds/drop.mp3",
-  isMuted: false,
+  isMuted: gameData.isMuted,
 };
-let Btncount= Math.round(Math.random() * 3+1);
-rotateSquare(Btncount);
-
-gamesquare.addEventListener("click", () => {
-  if (!isGameStarted){
-    startGame();
-  }else{
-    Btncount++;
-    if (Btncount > 4) {
-      Btncount = 1;
-    }
-    rotateSquare(Btncount);
+HighiestScore=gameData.HighiestScore
+console.log(HighiestScore);
+highiestscore.innerHTML=`Highiest Score ${HighiestScore}`
+currentscore.innerHTML=`Score ${Score}`
+ if (gamesounds.isMuted) {
+   playsound.style.backgroundImage = "url('../assets/icons/volumeup.png')";
+  } else {
+    playsound.style.backgroundImage = "url('../assets/icons/volumeoff.png')";
   }
-
-
-});
-
-playsound.addEventListener('click',()=>{
-  if(!gamesounds.isMuted)
+  let darkMode=gameData.isDarkMode
+  if(darkMode)
   {
-    gamesounds.isMuted=true;
-    playsound.style.background="url('../assets/icons/volumeoff.png')"
+    document.body.style.background="#090743"
+    document.body.style.color="white"
   }else{
-    gamesounds.isMuted=false;
-    playsound.style.background="url('../assets/icons/volumeup.png')"
+    document.body.style.background="white"
+    document.body.style.color="black"
   }
+  darkmode.addEventListener('click',()=>{
+    if(darkMode)
+    {
+      setGameDarkMode(false)
+      document.body.style.background="white"
+      document.body.style.color="black"
+      
+    }else{
+      setGameDarkMode(true)
+      document.body.style.background="#090743"
+      document.body.style.color="white"
+    }
+  })
+  
+  
+  
+  let Btncount= Math.round(Math.random() * 3+1);
+  rotateSquare(Btncount);
+  
+  gamesquare.addEventListener("click", () => {
+    if (!isGameStarted){
+      startGame();
+    }else{
+      Btncount++;
+      if (Btncount > 4) {
+        Btncount = 1;
+      }
+      rotateSquare(Btncount);
+    }
+
+    
+  });
+  
+  playsound.addEventListener('click',()=>{
+    if(gamesounds.isMuted)
+    {
+      setGameSound(false);
+      gamesounds.isMuted=false
+      playsound.style.backgroundImage = "url('../assets/icons/volumeup.png')";
+    }else{
+      setGameSound(true)
+      gamesounds.isMuted=true
+      playsound.style.backgroundImage = "url('../assets/icons/volumeoff.png')";
+  }
+
 })
 
 function startGame() {
@@ -60,7 +101,6 @@ function startGame() {
   }
   if (!isGameOver && isGameStarted) {
     playpause.style.display = "block";
-    playsound.style.display = "block";
     dropDot();
     gameInterval = setInterval(() => {
       randomDots = Math.round(Math.random() * 3 + 1);
@@ -76,12 +116,19 @@ function countScore(Btncount,randomDots)
 {
   if (Btncount == randomDots) {
     Score++;
+    currentscore.innerHTML=`Score ${Score}`
+    if(Score>=HighiestScore)
+    {
+      HighiestScore=Score
+      setGameHighiestScoreData(HighiestScore)
+      highiestscore.innerHTML=`Highiest Score ${HighiestScore}`
+    }
+
   } else {
     isGameOver = true;
     info.style.display = "block";
     info.innerHTML = "Game Over";
     playpause.style.display = "none";
-    playsound.style.display = "none";
     clearInterval(gameInterval);
     Playsound(gamesounds.isMuted,gamesounds.gameover)
   }
@@ -149,4 +196,39 @@ function dropDot(colorNumber,level) {
       colordot.style.top = dotposition +"px";
     }
   }
+}
+
+function setGameData()
+{
+  let localObj={
+    HighiestScore:0,
+    isMuted:false,
+    isDarkMode:false
+  }
+  localStorage.setItem('ImpossibleRush',JSON.stringify(localObj))
+}
+function getGameData() {
+  let localdata = localStorage.getItem("ImpossibleRush")
+  if (localdata === null) {
+    setGameData();
+  } else {
+    return JSON.parse(localdata);
+  }
+}
+function setGameSound(sound = true) {
+  let gameData = JSON.parse(localStorage.getItem("ImpossibleRush"));
+  gameData.isMuted = sound;
+  localStorage.setItem("ImpossibleRush", JSON.stringify(gameData));
+}
+function setGameHighiestScoreData(HighiestScore)
+{
+  let gameData = JSON.parse(localStorage.getItem("ImpossibleRush"));
+  gameData.HighiestScore = HighiestScore;
+  localStorage.setItem("ImpossibleRush", JSON.stringify(gameData));
+}
+function setGameDarkMode(dark=false)
+{
+  let gameData = JSON.parse(localStorage.getItem("ImpossibleRush"));
+  gameData.isDarkMode = dark;
+  localStorage.setItem("ImpossibleRush", JSON.stringify(gameData));
 }
