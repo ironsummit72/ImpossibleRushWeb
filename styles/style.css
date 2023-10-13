@@ -12,6 +12,9 @@
 }
 .gamesquare {
   box-shadow: -1px 10px 50px 1px red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .gamesquare-y {
   box-shadow: -1px 10px 50px 1px yellow;
