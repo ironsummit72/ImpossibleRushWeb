@@ -124,6 +124,7 @@ if (darkMode) {
 function countScore(Btncount,randomDots)
 {
   if (Btncount == randomDots) {
+    Playsound(gamesounds.isMuted,gamesounds.drop)
     Score++;
     currentscore.innerHTML=`Score ${Score}`
     if(Score>=HighiestScore)
@@ -159,7 +160,6 @@ function startGame() {
     dropDot();
     gameInterval = setInterval(() => {
       randomDots = Math.round(Math.random() * 3 + 1);
-      Playsound(gamesounds.isMuted,gamesounds.drop)
       dropDot(randomDots);
       setTimeout(() => {
         countScore(Btncount, randomDots);
