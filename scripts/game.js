@@ -22,14 +22,43 @@ let Score=0;
 let HighiestScore=undefined;
 let Difficulty=2
 let gameData=undefined
-
+let Countscoretime=1500
+let Gameintervaltime=1800
+let Playsoundime=1000;
+let Dropspeed=0.8;
+const timeReducer=(Difficulty)=>{
+  switch (Difficulty) {
+    case 1:
+      Countscoretime = 1000;
+      Gameintervaltime = 1200;
+      Playsoundime = 700;
+      Dropspeed = 1.1;
+      break;
+    case 2:
+      Countscoretime = 900;
+      Gameintervaltime = 1000;
+      Playsoundime = 600;
+      Dropspeed = 1.2;
+      break;
+    case 3:
+      Countscoretime = 500;
+      Gameintervaltime = 600;
+      Playsoundime = 400;
+      Dropspeed = 1.4;
+      break;
+    default:
+      Countscoretime = 1500;
+      Gameintervaltime = 1800;
+      Playsoundime = 1000;
+      Dropspeed = 1;
+  }
+}
 gameData=getGameData()
 const gamesounds = {
   gameover: `${path}/assets/sounds/gameover.mp3`,
   drop: `${path}/assets/sounds/drop.mp3`,
   isMuted: gameData.isMuted,
 };
-console.log("Drop sound",gamesounds.gameover);
 HighiestScore = gameData.HighiestScore;
 highiestscore.innerHTML = `Highiest Score ${HighiestScore}`;
 currentscore.innerHTML = `Score ${Score}`;
@@ -91,6 +120,32 @@ if (darkMode) {
 
 })
 
+
+function countScore(Btncount,randomDots)
+{
+  if (Btncount == randomDots) {
+    Score++;
+    currentscore.innerHTML=`Score ${Score}`
+    if(Score>=HighiestScore)
+    {
+      HighiestScore=Score
+      setGameHighiestScoreData(HighiestScore)
+      highiestscore.innerHTML=`Highiest Score ${HighiestScore}`
+    }
+    if (Score >5) {
+      timeReducer(2);
+    } else if (Score > 10) {
+      timeReducer(3);
+    }
+  } else {
+    isGameOver = true;
+    info.style.display = "block";
+    info.innerHTML = "Game Over";
+    playpause.style.display = "none";
+    clearInterval(gameInterval);
+    Playsound(gamesounds.isMuted,gamesounds.gameover)
+  }
+}
 function startGame() {
   let randomDots = Math.round(Math.random() * 3 + 1);
   if (!isGameStarted) {
@@ -105,42 +160,21 @@ function startGame() {
     gameInterval = setInterval(() => {
       randomDots = Math.round(Math.random() * 3 + 1);
       Playsound(gamesounds.isMuted,gamesounds.drop)
-      dropDot(randomDots, Difficulty);
+      dropDot(randomDots);
       setTimeout(() => {
         countScore(Btncount, randomDots);
-      }, 1500);
-    }, 1800);
-  }
-}
-function countScore(Btncount,randomDots)
-{
-  if (Btncount == randomDots) {
-    Score++;
-    currentscore.innerHTML=`Score ${Score}`
-    if(Score>=HighiestScore)
-    {
-      HighiestScore=Score
-      setGameHighiestScoreData(HighiestScore)
-      highiestscore.innerHTML=`Highiest Score ${HighiestScore}`
-    }
-
-  } else {
-    isGameOver = true;
-    info.style.display = "block";
-    info.innerHTML = "Game Over";
-    playpause.style.display = "none";
-    clearInterval(gameInterval);
-    Playsound(gamesounds.isMuted,gamesounds.gameover)
+      }, Countscoretime);
+    }, Gameintervaltime);
   }
 }
 
 function Playsound(ismuted, source) {
-setTimeout(()=>{
-  const audio = document.getElementById("gameover");
-  audio.muted = ismuted;
-  audio.src = source;
-  audio.play();
-},1000)
+  setTimeout(()=>{
+    const audio = document.getElementById("gameover");
+    audio.muted = ismuted;
+    audio.src = source;
+    audio.play();
+  },Playsoundime)
 }
 function rotateSquare(rotatevalue) {
   switch (rotatevalue) {
@@ -168,7 +202,7 @@ function rotateSquare(rotatevalue) {
 
 }
 
-function dropDot(colorNumber,level) {
+function dropDot(colorNumber) {
   colordot.style.display="block";
   switch (colorNumber){
     case 1:colordot.style.backgroundColor='red'
@@ -183,17 +217,17 @@ function dropDot(colorNumber,level) {
   
   let dotposition = colordot.offsetTop;
   clearInterval(frameIntervalID);
-  frameIntervalID = setInterval(frame, );
+  frameIntervalID = setInterval(frame,10 );
   function frame() {
-    if (dotposition>= 450) {
+    if (dotposition>= 65) {
       clearInterval(frameIntervalID)
       colordot.style.display="none";
-      colordot.style.top = 5 +"px";
+      colordot.style.top = 2 +"%";
     }
     else{
       
-      dotposition+=level;
-      colordot.style.top = dotposition +"px";
+      dotposition+=Dropspeed;
+      colordot.style.top = dotposition +"%";
     }
   }
 }
