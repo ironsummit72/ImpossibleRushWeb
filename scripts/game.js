@@ -8,7 +8,10 @@ const currentscore=document.getElementById('currentscore')
 const highiestscore=document.getElementById('highiestscore')
 gamesquare.style.width="300px"
 gamesquare.style.height="300px"
-gamesquare.style.background="url('../assets/images/game.png') no-repeat"
+let fullpath=window.location.href;
+let path=fullpath.substring(0,fullpath.lastIndexOf('/'))
+let absolutepath=path+'/assets/images/game.png'
+gamesquare.style.background=`url(${absolutepath}) no-repeat`
 colordot.style.display="none";
 playpause.style.display="none";
 let isGameStarted=false;
@@ -27,7 +30,6 @@ const gamesounds = {
   isMuted: gameData.isMuted,
 };
 HighiestScore = gameData.HighiestScore;
-console.log(HighiestScore);
 highiestscore.innerHTML = `Highiest Score ${HighiestScore}`;
 currentscore.innerHTML = `Score ${Score}`;
 if (gamesounds.isMuted) {
