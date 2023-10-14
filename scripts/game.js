@@ -22,37 +22,39 @@ let Score=0;
 let HighiestScore=undefined;
 let Difficulty=2
 let gameData=undefined
-let Countscoretime=1500
-let Gameintervaltime=1800
-let Playsoundime=1000;
-let Dropspeed=0.8;
-const timeReducer=(Difficulty)=>{
+let gameSpeeds={
+  Countscoretime:1500,
+  Gameintervaltime:1800,
+  Playsoundime:1000,
+  Dropspeed:0.8
+}
+const timeReducer = (Difficulty = 0) => {
   switch (Difficulty) {
     case 1:
-      Countscoretime = 1000;
-      Gameintervaltime = 1200;
-      Playsoundime = 700;
-      Dropspeed = 1.1;
+      gameSpeeds.Countscoretime = 1000;
+      gameSpeeds.Gameintervaltime = 1200;
+      gameSpeeds.Playsoundime = 700;
+      gameSpeeds.Dropspeed = 1.1;
       break;
     case 2:
-      Countscoretime = 900;
-      Gameintervaltime = 1000;
-      Playsoundime = 600;
-      Dropspeed = 1.2;
+      gameSpeeds.Countscoretime = 700;
+      gameSpeeds.Gameintervaltime = 1000;
+      gameSpeeds.Playsoundime = 500;
+      gameSpeeds.Dropspeed = 1.2;
       break;
     case 3:
-      Countscoretime = 500;
-      Gameintervaltime = 600;
-      Playsoundime = 400;
-      Dropspeed = 1.4;
+      gameSpeeds.Countscoretime = 600;
+      gameSpeeds.Gameintervaltime = 1000;
+      gameSpeeds.Playsoundime = 500;
+      gameSpeeds.Dropspeed = 1.3;
       break;
     default:
-      Countscoretime = 1500;
-      Gameintervaltime = 1800;
-      Playsoundime = 1000;
-      Dropspeed = 1;
+      gameSpeeds.Countscoretime = 1500;
+      gameSpeeds.Gameintervaltime = 1800;
+      gameSpeeds.Playsoundime = 1000;
+      gameSpeeds.Dropspeed = 1;
   }
-}
+};
 gameData=getGameData()
 const gamesounds = {
   gameover: `${path}/assets/sounds/gameover.mp3`,
@@ -75,19 +77,17 @@ if (darkMode) {
   document.body.style.background = "white";
   document.body.style.color = "black";
 }
-  darkmode.addEventListener('click',()=>{
-    if(darkMode)
-    {
-      setGameDarkMode(false)
-      document.body.style.background="white"
-      document.body.style.color="black"
-      
-    }else{
-      setGameDarkMode(true)
-      document.body.style.background="#090743"
-      document.body.style.color="white"
+  darkmode.addEventListener("click", () => {
+    if (darkMode) {
+      setGameDarkMode(false);
+      document.body.style.background = "white";
+      document.body.style.color = "black";
+    } else {
+      setGameDarkMode(true);
+      document.body.style.background = "#090743";
+      document.body.style.color = "white";
     }
-  })
+  });
   
   
   
@@ -106,34 +106,32 @@ if (darkMode) {
     }
   });
   
-  playsound.addEventListener('click',()=>{
-    if(gamesounds.isMuted)
-    {
+  playsound.addEventListener("click", () => {
+    if (gamesounds.isMuted) {
       setGameSound(false);
-      gamesounds.isMuted=false
-      playsound.style.backgroundImage = `url(${path}/assets/icons/volumeup.png`
-    }else{
-      setGameSound(true)
-      gamesounds.isMuted=true
-      playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`
-  }
-
-})
-
-
-function countScore(Btncount,randomDots)
-{
-  if (Btncount == randomDots) {
-    Playsound(gamesounds.isMuted,gamesounds.drop)
-    Score++;
-    currentscore.innerHTML=`Score ${Score}`
-    if(Score>=HighiestScore)
-    {
-      HighiestScore=Score
-      setGameHighiestScoreData(HighiestScore)
-      highiestscore.innerHTML=`Highiest Score ${HighiestScore}`
+      gamesounds.isMuted = false;
+      playsound.style.backgroundImage = `url(${path}/assets/icons/volumeup.png`;
+    } else {
+      setGameSound(true);
+      gamesounds.isMuted = true;
+      playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`;
     }
-    if (Score >5) {
+  });
+
+
+function countScore(Btncount, randomDots) {
+  if (Btncount == randomDots) {
+    Playsound(gamesounds.isMuted, gamesounds.drop);
+    Score++;
+    currentscore.innerHTML = `Score ${Score}`;
+    if (Score >= HighiestScore) {
+      HighiestScore = Score;
+      setGameHighiestScoreData(HighiestScore);
+      highiestscore.innerHTML = `Highiest Score ${HighiestScore}`;
+    }
+    if (Score < 6) {
+      timeReducer(1);
+    } else if (Score > 7) {
       timeReducer(2);
     } else if (Score > 10) {
       timeReducer(3);
@@ -144,7 +142,7 @@ function countScore(Btncount,randomDots)
     info.innerHTML = "Game Over";
     playpause.style.display = "none";
     clearInterval(gameInterval);
-    Playsound(gamesounds.isMuted,gamesounds.gameover)
+    Playsound(gamesounds.isMuted, gamesounds.gameover);
   }
 }
 function startGame() {
@@ -163,8 +161,8 @@ function startGame() {
       dropDot(randomDots);
       setTimeout(() => {
         countScore(Btncount, randomDots);
-      }, Countscoretime);
-    }, Gameintervaltime);
+      }, gameSpeeds.Countscoretime);
+    }, gameSpeeds.Gameintervaltime);
   }
 }
 
@@ -174,7 +172,7 @@ function Playsound(ismuted, source) {
     audio.muted = ismuted;
     audio.src = source;
     audio.play();
-  },Playsoundime)
+  },gameSpeeds.Playsoundime)
 }
 function rotateSquare(rotatevalue) {
   switch (rotatevalue) {
@@ -203,46 +201,47 @@ function rotateSquare(rotatevalue) {
 }
 
 function dropDot(colorNumber) {
-  colordot.style.display="block";
-  switch (colorNumber){
-    case 1:colordot.style.backgroundColor='red'
-    break;
-    case 2:colordot.style.backgroundColor='blue'
-    break;
-    case 3:colordot.style.backgroundColor='#07f93d'
-    break;
-    case 4:colordot.style.backgroundColor='yellow'
-    break;
+  colordot.style.display = "block";
+  switch (colorNumber) {
+    case 1:
+      colordot.style.backgroundColor = "red";
+      break;
+    case 2:
+      colordot.style.backgroundColor = "blue";
+      break;
+    case 3:
+      colordot.style.backgroundColor = "#07f93d";
+      break;
+    case 4:
+      colordot.style.backgroundColor = "yellow";
+      break;
   }
-  
+
   let dotposition = colordot.offsetTop;
   clearInterval(frameIntervalID);
-  frameIntervalID = setInterval(frame,10 );
+  frameIntervalID = setInterval(frame, 10);
   function frame() {
-    if (dotposition>= 65) {
-      clearInterval(frameIntervalID)
-      colordot.style.display="none";
-      colordot.style.top = 2 +"%";
-    }
-    else{
-      
-      dotposition+=Dropspeed;
-      colordot.style.top = dotposition +"%";
+    if (dotposition >= 65) {
+      clearInterval(frameIntervalID);
+      colordot.style.display = "none";
+      colordot.style.top = 2 + "%";
+    } else {
+      dotposition += gameSpeeds.Dropspeed;
+      colordot.style.top = dotposition + "%";
     }
   }
 }
 
-function setGameData()
-{
-  let localObj={
-    HighiestScore:0,
-    isMuted:false,
-    isDarkMode:false
-  }
-  localStorage.setItem('ImpossibleRush',JSON.stringify(localObj))
+function setGameData() {
+  let localObj = {
+    HighiestScore: 0,
+    isMuted: false,
+    isDarkMode: false,
+  };
+  localStorage.setItem("ImpossibleRush", JSON.stringify(localObj));
 }
 function getGameData() {
-  let localdata = localStorage.getItem("ImpossibleRush")
+  let localdata = localStorage.getItem("ImpossibleRush");
   if (localdata === null) {
     setGameData();
   } else {
