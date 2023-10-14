@@ -25,17 +25,18 @@ let gameData=undefined
 
 gameData=getGameData()
 const gamesounds = {
-  gameover: "../assets/sounds/gameover.mp3",
-  drop: "../assets/sounds/drop.mp3",
+  gameover: `${path}/assets/sounds/gameover.mp3`,
+  drop: `${path}/assets/sounds/drop.mp3`,
   isMuted: gameData.isMuted,
 };
+console.log("Drop sound",gamesounds.gameover);
 HighiestScore = gameData.HighiestScore;
 highiestscore.innerHTML = `Highiest Score ${HighiestScore}`;
 currentscore.innerHTML = `Score ${Score}`;
 if (gamesounds.isMuted) {
-  playsound.style.backgroundImage = "url('../assets/icons/volumeup.png')";
+  playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`;
 } else {
-  playsound.style.backgroundImage = "url('../assets/icons/volumeoff.png')";
+  playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`;
 }
 let darkMode = gameData.isDarkMode;
 if (darkMode) {
@@ -81,11 +82,11 @@ if (darkMode) {
     {
       setGameSound(false);
       gamesounds.isMuted=false
-      playsound.style.backgroundImage = "url('../assets/icons/volumeup.png')";
+      playsound.style.backgroundImage = `url(${path}/assets/icons/volumeup.png`
     }else{
       setGameSound(true)
       gamesounds.isMuted=true
-      playsound.style.backgroundImage = "url('../assets/icons/volumeoff.png')";
+      playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`
   }
 
 })
