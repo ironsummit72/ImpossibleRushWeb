@@ -77,15 +77,18 @@ if (darkMode) {
   document.body.style.background = "white";
   document.body.style.color = "black";
 }
-  darkmode.addEventListener("click", () => {
+darkmode.addEventListener("click", () => {
+    let darkMode = gameData.isDarkMode;
     if (darkMode) {
-      setGameDarkMode(false);
       document.body.style.background = "white";
       document.body.style.color = "black";
+      setGameDarkMode(false);
+      gameData.isDarkMode=false
     } else {
-      setGameDarkMode(true);
       document.body.style.background = "#090743";
       document.body.style.color = "white";
+      setGameDarkMode(true);
+      gameData.isDarkMode=true
     }
   });
   
@@ -259,7 +262,7 @@ function setGameHighiestScoreData(HighiestScore)
   gameData.HighiestScore = HighiestScore;
   localStorage.setItem("ImpossibleRush", JSON.stringify(gameData));
 }
-function setGameDarkMode(dark=false)
+function setGameDarkMode(dark)
 {
   let gameData = JSON.parse(localStorage.getItem("ImpossibleRush"));
   gameData.isDarkMode = dark;
