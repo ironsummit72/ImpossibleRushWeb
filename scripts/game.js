@@ -1,17 +1,17 @@
 const gamesquare = document.getElementById("gamesquare");
 const colordot = document.getElementById("colordot");
 const info = document.getElementById("info");
-const playpause=document.getElementById('playpause')
-const darkmode=document.getElementById('darkmode')
-const playsound=document.getElementById('playsound')
-const currentscore=document.getElementById('currentscore')
-const highiestscore=document.getElementById('highiestscore')
-gamesquare.style.width="300px"
-gamesquare.style.height="300px"
+const playpause=document.getElementById('playpause');
+const darkmode=document.getElementById('darkmode');
+const playsound=document.getElementById('playsound');
+const currentscore=document.getElementById('currentscore');
+const highiestscore=document.getElementById('highiestscore');
+gamesquare.style.width="300px";
+gamesquare.style.height="300px";
 let fullpath=window.location.href;
-let path=fullpath.substring(0,fullpath.lastIndexOf('/'))
-let absolutepath=path+'/assets/images/game.png'
-gamesquare.style.background=`url(${absolutepath}) no-repeat`
+let path=fullpath.substring(0,fullpath.lastIndexOf('/'));
+let absolutepath=path+'/assets/images/game.png';
+gamesquare.style.background=`url(${absolutepath}) no-repeat`;
 colordot.style.display="none";
 playpause.style.display="none";
 let isGameStarted=false;
@@ -20,8 +20,8 @@ let gameInterval=null;
 let frameIntervalID = null;
 let Score=0;
 let HighiestScore=undefined;
-let Difficulty=2
-let gameData=undefined
+let Difficulty=1;
+let gameData=undefined;
 let gameSpeeds={
   Countscoretime:1500,
   Gameintervaltime:1800,
@@ -55,7 +55,7 @@ const timeReducer = (Difficulty = 0) => {
       gameSpeeds.Dropspeed = 1;
   }
 };
-gameData=getGameData()
+gameData=getGameData();
 const gamesounds = {
   gameover: `${path}/assets/sounds/gameover.mp3`,
   drop: `${path}/assets/sounds/drop.mp3`,
@@ -83,12 +83,12 @@ darkmode.addEventListener("click", () => {
       document.body.style.background = "white";
       document.body.style.color = "black";
       setGameDarkMode(false);
-      gameData.isDarkMode=false
+      gameData.isDarkMode=false;
     } else {
       document.body.style.background = "#090743";
       document.body.style.color = "white";
       setGameDarkMode(true);
-      gameData.isDarkMode=true
+      gameData.isDarkMode=true;
     }
   });
   
@@ -124,7 +124,7 @@ darkmode.addEventListener("click", () => {
 
 function countScore(Btncount, randomDots) {
   if (Btncount == randomDots) {
-    Playsound(gamesounds.isMuted, gamesounds.drop);
+    playSound(gamesounds.isMuted, gamesounds.drop);
     Score++;
     currentscore.innerHTML = `Score ${Score}`;
     if (Score >= HighiestScore) {
@@ -145,7 +145,7 @@ function countScore(Btncount, randomDots) {
     info.innerHTML = "Game Over";
     playpause.style.display = "none";
     clearInterval(gameInterval);
-    Playsound(gamesounds.isMuted, gamesounds.gameover);
+    playSound(gamesounds.isMuted, gamesounds.gameover);
   }
 }
 function startGame() {
@@ -169,7 +169,7 @@ function startGame() {
   }
 }
 
-function Playsound(ismuted, source) {
+function playSound(ismuted, source) {
   setTimeout(()=>{
     const audio = document.getElementById("gameover");
     audio.muted = ismuted;
