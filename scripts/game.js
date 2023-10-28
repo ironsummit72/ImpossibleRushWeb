@@ -124,7 +124,7 @@ darkmode.addEventListener("click", () => {
 
 function countScore(Btncount, randomDots) {
   if (Btncount == randomDots) {
-    Playsound(gamesounds.isMuted, gamesounds.drop);
+    playSound(gamesounds.isMuted, gamesounds.drop);
     Score++;
     currentscore.innerHTML = `Score ${Score}`;
     if (Score >= HighiestScore) {
@@ -145,7 +145,7 @@ function countScore(Btncount, randomDots) {
     info.innerHTML = "Game Over";
     playpause.style.display = "none";
     clearInterval(gameInterval);
-    Playsound(gamesounds.isMuted, gamesounds.gameover);
+    playSound(gamesounds.isMuted, gamesounds.gameover);
   }
 }
 function startGame() {
@@ -169,7 +169,7 @@ function startGame() {
   }
 }
 
-function Playsound(ismuted, source) {
+function playSound(ismuted, source) {
   setTimeout(()=>{
     const audio = document.getElementById("gameover");
     audio.muted = ismuted;
