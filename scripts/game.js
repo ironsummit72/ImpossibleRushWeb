@@ -67,7 +67,7 @@ currentscore.innerHTML = `Score ${Score}`;
 if (gamesounds.isMuted) {
   playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`;
 } else {
-  playsound.style.backgroundImage = `url(${path}/assets/icons/volumeoff.png`;
+  playsound.style.backgroundImage = `url(${path}/assets/icons/volumeup.png`;
 }
 let darkMode = gameData.isDarkMode;
 if (darkMode) {
